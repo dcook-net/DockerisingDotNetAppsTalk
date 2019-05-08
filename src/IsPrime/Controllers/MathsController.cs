@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IsPrime.Controllers
 {
     [ApiController]
-    public class Maths : Controller
+    public class MathsController : Controller
     {
         [HttpGet("IsPrime/{number}")]
         public IActionResult Get([FromRoute] int number)
@@ -12,7 +12,7 @@ namespace IsPrime.Controllers
             return Ok(IsPrime(number));
         }
 
-        private static bool IsPrime(int number)
+        public bool IsPrime(int number)
         {
             if (number <= 1) return false;
             if (number == 2) return true;

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsPrime", "src\IsPrime\IsPrime.csproj", "{97D2DE5F-9424-41D0-A44C-D77180625F3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsPrimeTests", "test\IsPrimeTests\IsPrimeTests.csproj", "{B20F4474-D923-41EF-882C-DE7E270E474C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsPrime.Tests", "test\IsPrime.Tests\IsPrime.Tests.csproj", "{B20F4474-D923-41EF-882C-DE7E270E474C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
