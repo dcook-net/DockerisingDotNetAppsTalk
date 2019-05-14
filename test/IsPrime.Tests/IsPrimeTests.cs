@@ -1,29 +1,39 @@
-using IsPrime.Controllers;
+using Microsoft.AspNetCore.Hosting;
 using NUnit.Framework;
+using Microsoft.AspNetCore.TestHost;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace IsPrimeTests
 {
     public class IsPrimeTests
-    {
-        private MathsController _mathsController;
+    {        
+        private HttpClient _serviceUnderTest;
         
         [SetUp]
         public void Setup()
         {
-            _mathsController = new MathsController();
+            var builder = new WebHostBuilder()
+                .UseStartup<IsPrime.Startup>();
+            
+            var server = new TestServer(builder);
+
+            _serviceUnderTest = server.CreateClient();
         }
-       
+
         [TestCase(2)]
         [TestCase(3)]
         [TestCase(5)]
         [TestCase(7)]
         [TestCase(53)]
         [TestCase(89)]
-        public void ShouldReturnTrueForPrimeNumbers(int number)
+        public async Task ShouldReturnTrueForPrimeNumbers(int number)
         {
-            var actualResult = _mathsController.IsPrime(number);
+            var actualResult = await _serviceUnderTest.GetAsync($"/IsPrime/{number}");
 
-            Assert.True(actualResult);
+            var result = await actualResult.Content.ReadAsStringAsync();
+            
+            Assert.True(bool.Parse(result));
         }
         
         [TestCase(0)]
@@ -32,11 +42,19 @@ namespace IsPrimeTests
         [TestCase(6)]
         [TestCase(52)]
         [TestCase(99)]
-        public void ShouldReturnFalseForNonPrimeNumbers(int number)
+        public async Task ShouldReturnFalseForNonPrimeNumbers(int number)
         {
-            var actualResult = _mathsController.IsPrime(number);
+            var actualResult = await _serviceUnderTest.GetAsync($"/IsPrime/{number}");
 
-            Assert.False(actualResult);
+            var result = await actualResult.Content.ReadAsStringAsync();
+
+            Assert.False(bool.Parse(result));
         }
+//
+//        [Test]
+//        public void ShouldFail()
+//        {
+//            Assert.Fail();
+//        }
     }
 }

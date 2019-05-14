@@ -1,0 +1,7 @@
+.git
+*DS_STORE*
+bin\
+obj\
+*.md
+*.sh
+*Dockerfile*
