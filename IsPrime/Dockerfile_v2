@@ -1,5 +1,5 @@
 #Set the base image on which to base this image
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.203
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.204
 
 #Set the working directory for RUN, CMD, ENTRYPOINT, COPY and ADD instructions beyond this point
 WORKDIR /app
