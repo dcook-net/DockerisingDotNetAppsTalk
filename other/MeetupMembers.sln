@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupMembers", "src\MeetupMembers\MeetupMembers.csproj", "{05FD93FB-A1D9-46FF-9961-79F2EEB1F220}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupMembersApi", "src\MeetupMembersApi\MeetupMembersApi.csproj", "{05FD93FB-A1D9-46FF-9961-79F2EEB1F220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupMembers.Tests", "test\MeetupMembers.Tests\MeetupMembers.Tests.csproj", "{A185C536-16CA-489F-A380-9D4BABCB96B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetupMembersApi.Tests", "test\MeetupMembersApi.Tests\MeetupMembersApi.Tests.csproj", "{A185C536-16CA-489F-A380-9D4BABCB96B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

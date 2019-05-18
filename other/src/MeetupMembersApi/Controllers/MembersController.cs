@@ -25,20 +25,13 @@ namespace MeetupMembers.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMember([FromBody] Member member, CancellationToken cancellationToken)
         {
-//            try
-//            {
-                member.Id = Guid.NewGuid().ToString();
+            member.Id = Guid.NewGuid().ToString();
 
-                await _membersRepository.Create(member, cancellationToken);
+            await _membersRepository.Create(member, cancellationToken);
 
-                return Created(new Uri($"{Request.Scheme}://{Request.Host}/members/{member.Id}"), member);
-//            }
-//            catch (Exception ex)
-//            {
-//                return Ok(ex.Message);
-//            }
+            return Created(new Uri($"{Request.Scheme}://{Request.Host}/members/{member.Id}"), member);
         }
-    
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMember([FromRoute] string id, CancellationToken cancellationToken)
         {

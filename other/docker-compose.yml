@@ -11,7 +11,7 @@ services:
     links:
       - members.api
       - mongo
-    entrypoint: ["dotnet", "test", "./build/test/MeetupMembers.Tests/MeetupMembers.Tests.csproj", "--configuration", "Release"]
+    entrypoint: ["dotnet", "test", "./build/test/MeetupMembersApi.Tests/MeetupMembersApi.Tests.csproj", "--configuration", "Release"]
     volumes:
       - .:/build
   members.api:
