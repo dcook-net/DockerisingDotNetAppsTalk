@@ -1,0 +1,25 @@
+﻿@model List<FrontEnd.Models.Member>
+@{
+    ViewData["Title"] = "Members";
+}
+<div>
+<a href="/NewMember">Add New Member</a>
+</div>
+<br/>
+
+<div>Existing Members:</div>
+<br/>
+
+@foreach (var member in Model)
+{
+    <div class="text-center">
+        <div>@member.FullName</div>
+        <div>@member.Blurb</div>
+
+        <a href="/Member/Index/@member.Identifier">Edit</a>
+        <a href="/Member/Delete/@member.Identifier">Delete</a>
+    </div>
+    <br/><br/>
+}
+
+

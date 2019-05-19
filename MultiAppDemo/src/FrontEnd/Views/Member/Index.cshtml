@@ -1,0 +1,24 @@
+@model FrontEnd.Models.Member
+@{
+    ViewData["Title"] = "Member Details";
+}
+
+<form action="/Member/Edit" method="post">
+    <label for="Identifier">ID:</label>
+    <input type="text" name="Identifier" value="@Model.Identifier" readonly="readonly" />
+    <br/>
+    
+    <label for="ForeName">First Name:</label>
+    <input type="text" name="ForeName" value="@Model.ForeName" />
+    <br/>
+    
+    <label for="LastName">Last Name:</label>
+    <input type="text" name="LastName" value="@Model.LastName" />
+    <br/>
+    
+    <label for="Blurb">Biography:</label>
+    <input type="text" name="Blurb" value="@Model.Blurb" />
+    <br/>
+    
+    <input type="submit" name="Save" />
+ </form> 

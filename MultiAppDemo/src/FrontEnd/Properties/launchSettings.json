@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "FrontEnd": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MEMBERSAPI__URI" : "http://localhost:9010"
+      }
+    }
+  }
+}

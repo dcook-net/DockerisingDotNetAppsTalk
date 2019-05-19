@@ -1,0 +1,18 @@
+@{ 
+    ViewData["Title"] = "New Member Details";
+}
+
+<form action="/NewMember/Create" method="post">
+    <label for="ForeName">First Name:</label>
+    <input type="text" name="ForeName" />
+    
+    <label for="LastName">Last Name:</label>
+    <input type="text" name="LastName" />
+  
+    <label for="Blurb">Biography:</label>
+    <input type="text" name="Blurb" />
+
+    <input type="submit" name="Save" />
+
+ </form> 
+ 

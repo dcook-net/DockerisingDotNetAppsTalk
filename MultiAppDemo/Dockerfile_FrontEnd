@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.204-alpine3.9 AS builder
+COPY . .
+
+RUN dotnet publish -c Release ./src/FrontEnd/FrontEnd.csproj -o /app
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5-alpine3.9
+WORKDIR /app
+
+COPY --from=builder /app .
+
+EXPOSE 80
+CMD ["dotnet", "FrontEnd.dll"]
