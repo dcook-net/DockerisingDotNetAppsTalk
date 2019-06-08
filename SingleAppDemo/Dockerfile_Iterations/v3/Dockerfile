@@ -7,5 +7,4 @@ WORKDIR /app
 
 COPY --from=builder /app .
 
-EXPOSE 9021
 CMD ["dotnet", "IsPrime.dll"]
