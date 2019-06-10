@@ -1,16 +1,13 @@
 version: "3"
 services:
   test:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2.204-alpine3.9
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2.300-alpine3.9
     depends_on:
       - members.api
       - mongo
     environment:
       - MONGOURL=mongodb://mongo:27017
       - SERVICEURI=http://members.api:9010
-    links:
-      - members.api
-      - mongo
     entrypoint: ["dotnet", "test", "./build/test/MeetupMembersApi.Tests/MeetupMembersApi.Tests.csproj", "--configuration", "Release"]
     volumes:
       - .:/build
@@ -23,8 +20,6 @@ services:
       - members.api
     environment:
       - MEMBERSAPI__URI=http://members.api:9010
-    links:
-      - members.api
     ports:
       - 80:8080
   members.api:
@@ -38,8 +33,6 @@ services:
       - MONGO__MONGOCONNECTION=mongodb://mongo:27017
     ports:
       - 9010:9010
-    links:
-      - mongo
   mongo:
     container_name: mongo
     image: mongo

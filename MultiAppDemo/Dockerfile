@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.204-alpine3.9 AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.300-alpine3.9 AS builder
 COPY . .
 
 RUN dotnet test -c Release 
@@ -9,5 +9,4 @@ WORKDIR /app
 
 COPY --from=builder /app .
 
-EXPOSE 9010
 CMD ["dotnet", "MeetupMembersApi.dll"]
