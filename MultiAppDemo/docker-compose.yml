@@ -23,18 +23,16 @@ services:
     ports:
       - 80:8080
   members.api:
-    container_name: membersapi
     build:
       context: .
-      dockerfile: Dockerfile_local
+      dockerfile: Dockerfile_Api_Local
     depends_on:
-      - mongo
+      - members.database
     environment:
-      - MONGO__MONGOCONNECTION=mongodb://mongo:27017
+      - MONGO__MONGOCONNECTION=mongodb://members.database:27017
     ports:
       - 9010:9010
-  mongo:
-    container_name: mongo
+  members.database:
     image: mongo
     ports:
       - 27017:27017
