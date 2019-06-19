@@ -4,9 +4,9 @@ services:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2.300-alpine3.9
     depends_on:
       - members.api
-      - mongo
+      - members.database
     environment:
-      - MONGOURL=mongodb://mongo:27017
+      - MONGOURL=mongodb://members.database:27017
       - SERVICEURI=http://members.api:9010
     entrypoint: ["dotnet", "test", "./build/test/MeetupMembersApi.Tests/MeetupMembersApi.Tests.csproj", "--configuration", "Release"]
     volumes:
