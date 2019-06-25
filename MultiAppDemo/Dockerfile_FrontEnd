@@ -4,9 +4,10 @@ COPY . .
 RUN dotnet publish -c Release ./src/FrontEnd/FrontEnd.csproj -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5-alpine3.9
+
+USER nobody
 WORKDIR /app
 
-COPY --from=builder /app .
+COPY --chown=nobody:nobody --from=builder /app .
 
-EXPOSE 80
 CMD ["dotnet", "FrontEnd.dll"]
