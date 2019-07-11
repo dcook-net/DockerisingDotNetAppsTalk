@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-<!--        <DebugType>full</DebugType>-->
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,10 +15,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\test\MeetupMembersApi.Tests\MeetupMembersApi.Tests.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Pages" />
     </ItemGroup>
 
 </Project>

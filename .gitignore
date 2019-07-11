@@ -21,3 +21,4 @@ project.lock.json
 *.slconfig
 
 *DS_Store*
+*.idea*
