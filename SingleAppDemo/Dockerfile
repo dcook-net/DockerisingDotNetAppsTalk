@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.301-alpine3.9 AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.401-alpine3.9 AS builder
 COPY . .
 
 RUN dotnet test -c Release ./test/IsPrime.Tests/IsPrime.Tests.csproj
