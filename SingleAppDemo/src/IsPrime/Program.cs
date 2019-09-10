@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace IsPrime
 {
-    class Program
+    public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            new WebHostBuilder()
-                .UseUrls("http://*:9021")
-                .UseStartup<Startup>()
-                .UseKestrel()
+            Host
+                .CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webHostBuilder => {
+                    webHostBuilder
+                        .UseStartup<Startup>()
+                        .UseUrls("http://*:9021")
+                        .UseKestrel();
+                })
                 .Build()
                 .Run();
         }
