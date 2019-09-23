@@ -1,22 +1,26 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace MeetupMembersApi
 {
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseUrls("http://*:9010")
-                .UseKestrel()
-                .UseStartup<Startup>()
+            Host
+                .CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webHostBuilder => {
+                    webHostBuilder
+                        .UseStartup<Startup>()
+                        .UseUrls("http://*:9010")
+                        .UseKestrel();
+                })
                 .ConfigureLogging(builder => builder.AddConsole())
                 .ConfigureAppConfiguration(config => config.AddEnvironmentVariables())
-                .Build();
-            
-            host.Run();
+                .Build()
+                .Run();
         }
     }
 }

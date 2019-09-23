@@ -1,11 +1,8 @@
 ﻿using MeetupMembersApi.Models;
 using MeetupMembersApi.Mongo;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace MeetupMembersApi
 {
@@ -20,8 +17,8 @@ namespace MeetupMembersApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddControllers();
+            
             services.Configure<MongoConfiguration>(Configuration.GetSection("Mongo"));
             
             services.AddSingleton<IMongoDatabaseProvider, MongoDatabaseProvider>();
@@ -30,9 +27,14 @@ namespace MeetupMembersApi
             services.AddSingleton<IDataRepository<Member>, MongoDataRepository<Member>>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

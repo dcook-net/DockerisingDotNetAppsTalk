@@ -15,13 +15,13 @@ namespace FrontEnd.Controllers
         
         public async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.FromResult(View());
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Member newMember)
         {
-            var member = await _apiService.CreateMember(newMember);
+            var _ = await _apiService.CreateMember(newMember);
 
             return Redirect("~/Home/");
         }

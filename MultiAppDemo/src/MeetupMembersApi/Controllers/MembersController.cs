@@ -22,7 +22,7 @@ namespace MeetupMembersApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMember([FromBody] Member member, CancellationToken cancellationToken)
         {
-            member.Id = ObjectId.GenerateNewId().ToString();;
+            member.Id = ObjectId.GenerateNewId().ToString();
 
             await _membersRepository.Create(member, cancellationToken);
 

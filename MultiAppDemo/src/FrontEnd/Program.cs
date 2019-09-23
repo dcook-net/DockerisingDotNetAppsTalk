@@ -1,22 +1,26 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace FrontEnd
 {
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseUrls("http://*:8080")
-                .UseKestrel()
-                .ConfigureAppConfiguration(config => config.AddEnvironmentVariables())
+            Host
+                .CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webHostBuilder => {
+                    webHostBuilder
+                        .UseStartup<Startup>()
+                        .UseUrls("http://*:8080")
+                        .UseKestrel();
+                })
                 .ConfigureLogging(builder => builder.AddConsole())
-                .UseStartup<Startup>()
-                .Build();
-            
-            host.Run();
+                .ConfigureAppConfiguration(config => config.AddEnvironmentVariables())
+                .Build()
+                .Run();
         }
     }
 }

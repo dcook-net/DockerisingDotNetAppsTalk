@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.401-alpine3.9 AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-alpine3.9 AS builder
 COPY . .
 
 RUN dotnet publish -c Release ./src/FrontEnd/FrontEnd.csproj -o /app
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.6-alpine3.9
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-alpine3.9
 
 USER nobody
 WORKDIR /app
