@@ -1,7 +1,7 @@
 version: "3"
 services:
   test:
-    image: mcr.microsoft.com/dotnet/core/sdk:3.0.100-alpine3.9
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0.101-alpine3.10
     depends_on:
       - members.api
       - members.database
