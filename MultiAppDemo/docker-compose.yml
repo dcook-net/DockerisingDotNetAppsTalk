@@ -1,7 +1,7 @@
 version: "3"
 services:
   test:
-    image: mcr.microsoft.com/dotnet/core/sdk:3.0.101-alpine3.10
+    image: mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine3.10
     depends_on:
       - members.api
       - members.database
@@ -34,7 +34,7 @@ services:
     ports:
       - 9010:9010
   members.database:
-    image: mongo:4.0.12
+    image: mongo:4.0.13
     ports:
       - 27017:27017
         
