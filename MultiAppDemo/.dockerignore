@@ -1,0 +1,16 @@
+# IDE
+.vscode/
+.vs/
+*.user
+.idea/
+
+# directories
+**/bin/
+**/obj/
+**/out/
+
+# files
+Dockerfile*
+**/*.md
+
+*DS_Store*
