@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using MongoDB.Driver;
 
 namespace MeetupMembersApi.Mongo
@@ -19,16 +16,11 @@ namespace MeetupMembersApi.Mongo
             await _collection.InsertOneAsync(objectToSave, new InsertOneOptions(), cancellationToken);
         }
 
-        public async Task<T> Read(string id, CancellationToken cancellationToken) 
+        public async Task<T?> Read(string id, CancellationToken cancellationToken) 
         {
-            T result;
+            using var response = await _collection.FindAsync(x => x.Id == id, new FindOptions<T>(), cancellationToken);
 
-            using (var response = await _collection.FindAsync(x => x.Id == id, new FindOptions<T>(), cancellationToken))
-            {
-                  result = await response.FirstOrDefaultAsync(cancellationToken);
-            }
-            
-            return result;
+            return await response.FirstOrDefaultAsync(cancellationToken);
         }
 
         public Task<bool> Delete(string id, CancellationToken cancellationToken)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MeetupMembersApi.Models;
+﻿using MeetupMembersApi.Models;
 using MeetupMembersApi.Mongo;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -59,10 +56,7 @@ namespace MeetupMembersApi.Controllers
         {
             var result = await _membersRepository.Delete(id, cancellationToken);
 
-            if (result)
-                return Ok();
-
-            return NotFound();
+            return result ? Ok() : NotFound();
         }
     }
 }

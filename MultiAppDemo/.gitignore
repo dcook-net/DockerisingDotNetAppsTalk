@@ -1,2 +1,11 @@
 *DS_store*
 *.idea*
+
+# directories
+**/bin/
+**/obj/
+**/out/
+
+# files
+Dockerfile*
+**/*.md

@@ -14,13 +14,9 @@ namespace MeetupMembersApi.Tests
         
         public static async Task<Member> GetMemberById(this IMongoCollection<Member> collection, string id)
         {
-            Member result;
-            using (var response = await collection.FindAsync(x => x.Id == id, new FindOptions<Member>(), CancellationToken.None))
-            {
-                result = await response.FirstOrDefaultAsync(CancellationToken.None);
-            }
-            
-            return result;
+            using var response = await collection.FindAsync(x => x.Id == id, new FindOptions<Member>(), CancellationToken.None);
+
+            return await response.FirstOrDefaultAsync(CancellationToken.None);
         }
     }
 }

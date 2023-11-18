@@ -1,7 +1,8 @@
 version: "3"
 services:
   test:
-    image: mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine3.10
+    image: mcr.microsoft.com/dotnet/sdk:8.0.100-alpine3.18
+    platform: linux/arm64/v8
     depends_on:
       - members.api
       - members.database
@@ -22,7 +23,7 @@ services:
     environment:
       - MEMBERSAPI__URI=http://members.api:9010
     ports:
-      - 80:8080
+      - "80:8080"
   members.api:
     build:
       context: .
@@ -32,10 +33,9 @@ services:
     environment:
       - MONGO__MONGOCONNECTION=mongodb://members.database:27017
     ports:
-      - 9010:9010
+      - "9010:9010"
   members.database:
-    image: mongo:4.0.13
+    image: mongo:5.0.22
+    platform: linux/arm64/v8
     ports:
-      - 27017:27017
-        
-        
+      - "27017:27017"

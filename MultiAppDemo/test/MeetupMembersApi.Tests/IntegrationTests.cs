@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
@@ -45,7 +46,7 @@ namespace MeetupMembersApi.Tests
             var newMember = GenerateBrandNewMember();
 
             //Act
-            var result = await _serviceUnderTest.PostAsync("members", SerialiseContent(newMember), CancellationToken.None);
+            var result = await _serviceUnderTest.PostAsync("members", JsonContent.Create(newMember), CancellationToken.None);
 
             //Assert
             Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.Created));
@@ -146,7 +147,7 @@ namespace MeetupMembersApi.Tests
             
             //Act
             var result = await _serviceUnderTest.PutAsync("members", 
-                SerialiseContent(updatedMemberDetails), CancellationToken.None);
+                JsonContent.Create(updatedMemberDetails), CancellationToken.None);
             
             //Assert
             Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
@@ -175,8 +176,6 @@ namespace MeetupMembersApi.Tests
             
             Assert.That(member, Is.Null);
         }
-
-        private static JsonContent SerialiseContent(Member member) => new JsonContent(member, new JsonSerializerSettings());
 
         private IMongoCollection<Member> GetMongoDataRepository()
         {

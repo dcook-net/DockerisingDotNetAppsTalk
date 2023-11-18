@@ -1,9 +1,19 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine3.10 AS builder
-COPY . .
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0.100-alpine3.18 AS builder
 
-RUN dotnet publish -c Release ./src/MeetupMembersApi/MeetupMembersApi.csproj -o /app
+ARG TARGETARCH
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.0-alpine3.10
+WORKDIR BUILD
+
+COPY ./NuGet.config .
+COPY ./src/MeetupMembersApi/MeetupMembersApi.csproj .
+
+RUN dotnet restore -a $TARGETARCH
+
+COPY ./src/MeetupMembersApi .
+
+RUN dotnet publish --no-restore -a $TARGETARCH MeetupMembersApi.csproj -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.0-alpine3.18
 WORKDIR /app
 
 COPY --from=builder /app .

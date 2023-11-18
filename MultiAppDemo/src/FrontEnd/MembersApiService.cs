@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FrontEnd.Models;
-using MeetupMembersApi.Tests;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
@@ -24,39 +24,39 @@ namespace FrontEnd
         {
             var response = await _httpClient.GetAsync("members");
 
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<List<Member>>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings());
+            if (!response.IsSuccessStatusCode) return new List<Member>();
             
-            return new List<Member>();
+            var members = JsonConvert.DeserializeObject<List<Member>>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings());
+            
+            return members ?? new List<Member>();
         }
 
-        public async Task<Member> GetMember(string id)
+        public async Task<Member?> GetMember(string id)
         {
             var response = await _httpClient.GetAsync($"members/{id}");
             
-            if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<Member>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings());
-
-            return new Member();
+            return response.IsSuccessStatusCode
+                ? JsonConvert.DeserializeObject<Member>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings()) 
+                : new Member();
         }
 
         public async Task<Member> UpdateMemberDetails(Member member)
         {
-            var _ = await _httpClient.PutAsync("members", new JsonContent(member));
+            _ = await _httpClient.PutAsync("members", JsonContent.Create(member));
 
             return member;
         }
 
         public async Task<bool> DeleteMember(string id)
         {
-            var _ = await _httpClient.DeleteAsync($"members/{id}");
+            _ = await _httpClient.DeleteAsync($"members/{id}");
 
             return true;
         }
 
         public async Task<bool> CreateMember(Member newMember)
         {
-            var _ = await _httpClient.PostAsync("members", new JsonContent(newMember));
+            _ = await _httpClient.PostAsync("members", JsonContent.Create(newMember));
 
             return true;
         }
